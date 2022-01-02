@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <signal.h>
+
 char	*char_to_binary(char c)
 {
 	char	*ret;
@@ -19,7 +21,7 @@ char	*char_to_binary(char c)
 	return (ret);
 }
 
-void	send_str(char *str, int pid)
+void	send_str(int pid, char *str)
 {
 	int		i;
 	char	*c;
@@ -41,8 +43,11 @@ void	send_str(char *str, int pid)
 		i++;
 	}
 }
-
-int	main()
+int	main(int ac, char** av)
 {
-	send_str("hello");
+	if (ac == 3)
+	{
+		send_str(atoi(av[1]), av[2]);
+	}
+	return (0);
 }
