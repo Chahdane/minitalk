@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <signal.h>
-#include <unistd.h>
+#include "minitalk.h"
 
 char	*char_to_binary(char c)
 {
@@ -48,8 +45,8 @@ void	send_str(int pid, char *str)
 int	main(int ac, char** av)
 {
 	if (ac == 3)
-	{
 		send_str(atoi(av[1]), av[2]);
-	}
+	else 
+		printf("unvalid args");
 	return (0);
 }

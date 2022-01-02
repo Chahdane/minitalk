@@ -1,6 +1,4 @@
-#include <signal.h>
-#include <stdio.h>
-#include <unistd.h>
+#include "minitalk.h"
 
 int	power_of_two(int pow)
 {
