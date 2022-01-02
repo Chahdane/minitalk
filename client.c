@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
+#include <unistd.h>
 
 char	*char_to_binary(char c)
 {
@@ -39,6 +40,7 @@ void	send_str(int pid, char *str)
 			else
 				kill(pid, SIGUSR2);
 			j++;
+			usleep(100);
 		}
 		i++;
 	}
