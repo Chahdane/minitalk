@@ -6,10 +6,9 @@
 /*   By: achahdan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 15:21:42 by achahdan          #+#    #+#             */
-/*   Updated: 2022/01/04 15:21:43 by achahdan         ###   ########.fr       */
+/*   Updated: 2022/01/04 18:37:16 by achahdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minitalk.h"
 
@@ -55,11 +54,12 @@ void	send_str(int pid, char *str)
 		i++;
 	}
 }
-int	main(int ac, char** av)
+
+int	main(int ac, char **av)
 {
 	if (ac == 3)
 		send_str(atoi(av[1]), av[2]);
-	else 
+	else
 		printf("unvalid args");
 	return (0);
 }
