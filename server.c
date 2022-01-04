@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: achahdan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/04 15:21:59 by achahdan          #+#    #+#             */
+/*   Updated: 2022/01/04 15:22:00 by achahdan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #include "minitalk.h"
 
 int	power_of_two(int pow)
@@ -22,27 +35,37 @@ char binary_to_char(int *byte)
     while (i < 8)
     {
         if (byte[i] == 1)
-            c += (byte[i] * power_of_two(i));
+            c += (byte[i] * power_of_two(7 - i));
         i++;
     }
     return (c);
 }
-void    sig_handler(int signal)
+
+void	sig_handler(int signal)
 {
-    static int *byte;
+    static int byte[8];
     static int  count = 0;
-    if (signal == SIGUSR1)
+	char c;
+
+	if (signal == SIGUSR1)
+	{
         byte[count] = 1;
-    else
+		count++;
+	}
+    else if (signal == SIGUSR2)
+	{
         byte[count] = 0;
-    count++;
-    if (count == 7)
-    {
-        count = 0;
-        printf("%c",binary_to_char(byte));
-    }
+		count++;
+	}
+	if (count == 8)
+	{
+		c = binary_to_char(byte);
+		write(1, &c, 1);
+		count = 0;
+	}
+
 }
-int main()
+int	main()
 {
 	printf("PID: %d\n", getpid());
 	while (1)
