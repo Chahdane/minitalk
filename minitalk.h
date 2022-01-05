@@ -12,10 +12,13 @@
 
 #ifndef MINITALK_H
 # define MINITALK_H
+#include <execinfo.h>
 
 # include <unistd.h>
 # include <signal.h>
 # include <stdlib.h>
 # include <stdio.h>
+#include <string.h>
+char	*ft_itoa(int nx);
 
 #endif

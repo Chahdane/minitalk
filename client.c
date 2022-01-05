@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 
 #include "minitalk.h"
-
+ 
+unsigned long len = 0;
 char	*char_to_binary(char c)
 {
 	char	*ret;
@@ -51,15 +52,26 @@ void	send_str(int pid, char *str)
 			j++;
 			usleep(100);
 		}
+		free(c);
 		i++;
 	}
 }
+void sig_handler(int sig)
+{
+	if (sig == SIGUSR1)
+		len++;
+}
 
 int	main(int ac, char **av)
-{
+{ 
+	signal(SIGUSR1, sig_handler);
+	
 	if (ac == 3)
 		send_str(atoi(av[1]), av[2]);
 	else
 		printf("unvalid args");
+	//printf("%d",len);
+	if (len == strlen(av[2]))
+		printf("got it");
 	return (0);
 }

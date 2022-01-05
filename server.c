@@ -6,13 +6,13 @@
 /*   By: achahdan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 15:21:59 by achahdan          #+#    #+#             */
-/*   Updated: 2022/01/04 18:42:29 by achahdan         ###   ########.fr       */
+/*   Updated: 2022/01/05 23:08:53 by achahdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-int	power_of_two(int pow)
+int		power_of_two(int pow)
 {
 	int	res;
 
@@ -25,10 +25,10 @@ int	power_of_two(int pow)
 	return (res);
 }
 
-char	binary_to_char(int *byte)
+int	binary_to_char(int *byte)
 {
 	int		i;
-	char	c;
+	int	c;
 
 	i = 0;
 	c = 0;
@@ -41,11 +41,11 @@ char	binary_to_char(int *byte)
 	return (c);
 }
 
-void	sig_handler(int signal)
+void	sig_handler(int signal,siginfo_t *info)
 {
 	static int	byte[8];
 	static int	count = 0;
-	char		c;
+	int		c;
 
 	if (signal == SIGUSR1)
 	{
@@ -61,18 +61,24 @@ void	sig_handler(int signal)
 	{
 		c = binary_to_char(byte);
 		write(1, &c, 1);
+		kill(info->si_pid,SIGUSR1 );
 		count = 0;
 	}
 }
 
 int	main(void)
 {
+	int server_pid;
+	struct sigaction sa;
+	sa.sa_handler = (void *)sig_handler;
+	sa.sa_flags = SA_SIGINFO;
 	printf("PID: %d\n", getpid());
 	while (1)
 	{
-		signal(SIGUSR1, sig_handler);
-		signal(SIGUSR2, sig_handler);
+		sigaction(SIGUSR1,&sa,NULL);
+		sigaction(SIGUSR2,&sa,NULL);
 		pause();
 	}
+	kill(server_pid, SIGUSR1);
 	return (0);
 }
