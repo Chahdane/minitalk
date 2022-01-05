@@ -6,7 +6,7 @@
 /*   By: achahdan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 15:22:13 by achahdan          #+#    #+#             */
-/*   Updated: 2022/01/04 18:43:30 by achahdan         ###   ########.fr       */
+/*   Updated: 2022/01/05 23:24:01 by achahdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,5 @@
 # include <stdlib.h>
 # include <stdio.h>
 #include <string.h>
-char	*ft_itoa(int nx);
 
 #endif
