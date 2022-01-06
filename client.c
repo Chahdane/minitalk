@@ -51,7 +51,7 @@ void	send_str(int pid, char *str)
 			else
 				kill(pid, SIGUSR2);
 			j++;
-			usleep(100);
+			usleep(80);
 		}
 		free(c);
 		i++;
@@ -71,7 +71,7 @@ int	main(int ac, char **av)
 		send_str(ft_atoi(av[1]), av[2]);
 	else
 	{
-		ft_printf("unvalid args");
+		ft_printf("Unvalid args");
 		return (0);
 	}
 	if (g_len == ft_strlen(av[2]))

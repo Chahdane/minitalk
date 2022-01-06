@@ -54,7 +54,7 @@ void	sig_handler(int signal, siginfo_t *info)
 	if (count == 8)
 	{
 		c = binary_to_char(byte);
-		write(1, &c, 1);
+		ft_printf("%c", c);
 		kill(info->si_pid, SIGUSR1);
 		count = 0;
 	}
