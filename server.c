@@ -62,7 +62,6 @@ void	sig_handler(int signal, siginfo_t *info)
 
 int	main(void)
 {
-	int					server_pid;
 	struct sigaction	sa;
 
 	sa.sa_handler = (void *)sig_handler;
@@ -74,6 +73,5 @@ int	main(void)
 		sigaction(SIGUSR2, &sa, NULL);
 		pause();
 	}
-	kill(server_pid, SIGUSR1);
 	return (0);
 }
