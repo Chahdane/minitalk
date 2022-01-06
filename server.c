@@ -6,13 +6,13 @@
 /*   By: achahdan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 15:21:59 by achahdan          #+#    #+#             */
-/*   Updated: 2022/01/05 23:08:53 by achahdan         ###   ########.fr       */
+/*   Updated: 2022/01/06 15:31:48 by achahdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utls/minitalk.h"
 
-int		power_of_two(int pow)
+int	power_of_two(int pow)
 {
 	int	res;
 
@@ -27,7 +27,7 @@ int		power_of_two(int pow)
 
 int	binary_to_char(int *byte)
 {
-	int		i;
+	int	i;
 	int	c;
 
 	i = 0;
@@ -41,11 +41,11 @@ int	binary_to_char(int *byte)
 	return (c);
 }
 
-void	sig_handler(int signal,siginfo_t *info)
+void	sig_handler(int signal, siginfo_t *info)
 {
 	static int	byte[8];
 	static int	count = 0;
-	int		c;
+	int			c;
 
 	if (signal == SIGUSR1)
 		byte[count++] = 1;
@@ -55,22 +55,23 @@ void	sig_handler(int signal,siginfo_t *info)
 	{
 		c = binary_to_char(byte);
 		write(1, &c, 1);
-		kill(info->si_pid,SIGUSR1 );
+		kill(info->si_pid, SIGUSR1);
 		count = 0;
 	}
 }
 
 int	main(void)
 {
-	int server_pid;
-	struct sigaction sa;
+	int					server_pid;
+	struct sigaction	sa;
+
 	sa.sa_handler = (void *)sig_handler;
 	sa.sa_flags = SA_SIGINFO;
-	ft_printf("PID : %d\n",getpid());
+	ft_printf("PID : %d\n", getpid());
 	while (1)
 	{
-		sigaction(SIGUSR1,&sa,NULL);
-		sigaction(SIGUSR2,&sa,NULL);
+		sigaction(SIGUSR1, &sa, NULL);
+		sigaction(SIGUSR2, &sa, NULL);
 		pause();
 	}
 	kill(server_pid, SIGUSR1);

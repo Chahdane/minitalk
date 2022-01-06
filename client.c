@@ -6,13 +6,13 @@
 /*   By: achahdan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 15:21:42 by achahdan          #+#    #+#             */
-/*   Updated: 2022/01/04 18:37:16 by achahdan         ###   ########.fr       */
+/*   Updated: 2022/01/06 15:32:23 by achahdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utls/minitalk.h"
 
-unsigned long len = 0;
+unsigned long	g_len = 0;
 
 char	*char_to_binary(char c)
 {
@@ -57,24 +57,24 @@ void	send_str(int pid, char *str)
 		i++;
 	}
 }
-void sig_handler(int sig)
+
+void	sig_handler(int sig)
 {
 	if (sig == SIGUSR1)
-		len++;
+		g_len++;
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	#define COLOR_GREEN	"\x1b[32m"
 	signal(SIGUSR1, sig_handler);
 	if (ac == 3)
 		send_str(ft_atoi(av[1]), av[2]);
 	else
 	{
 		ft_printf("unvalid args");
-		return 0;
+		return (0);
 	}
-	if (len == ft_strlen(av[2]))
-		ft_printf(COLOR_GREEN "\nMESSAGE RECIEVED\n\n");
+	if (g_len == ft_strlen(av[2]))
+		ft_printf("\nMESSAGE RECIEVED\n\n");
 	return (0);
 }
