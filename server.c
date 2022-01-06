@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "utls/minitalk.h"
 
 int		power_of_two(int pow)
 {
@@ -48,15 +48,9 @@ void	sig_handler(int signal,siginfo_t *info)
 	int		c;
 
 	if (signal == SIGUSR1)
-	{
-		byte[count] = 1;
-		count++;
-	}
+		byte[count++] = 1;
 	else if (signal == SIGUSR2)
-	{
-		byte[count] = 0;
-		count++;
-	}
+		byte[count++] = 0;
 	if (count == 8)
 	{
 		c = binary_to_char(byte);
@@ -72,7 +66,7 @@ int	main(void)
 	struct sigaction sa;
 	sa.sa_handler = (void *)sig_handler;
 	sa.sa_flags = SA_SIGINFO;
-	printf("PID: %d\n", getpid());
+	ft_printf("PID : %d\n",getpid());
 	while (1)
 	{
 		sigaction(SIGUSR1,&sa,NULL);
