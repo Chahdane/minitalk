@@ -66,7 +66,11 @@ int	main(void)
 	struct sigaction sa;
 	sa.sa_handler = (void *)sig_handler;
 	sa.sa_flags = SA_SIGINFO;
+<<<<<<< HEAD
 	ft_printf("PID : %d\n",getpid());
+=======
+	printf("PID: %d\n", getpid());
+>>>>>>> d18f7086f3c2ad9f2281df396f275cdacb0cc821
 	while (1)
 	{
 		sigaction(SIGUSR1,&sa,NULL);

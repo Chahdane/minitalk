@@ -10,10 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+<<<<<<< HEAD
 #include "utls/minitalk.h"
 
 unsigned long len = 0;
 
+=======
+#include "minitalk.h"
+ 
+unsigned long len = 0;
+>>>>>>> d18f7086f3c2ad9f2281df396f275cdacb0cc821
 char	*char_to_binary(char c)
 {
 	char	*ret;
@@ -63,18 +69,32 @@ void sig_handler(int sig)
 		len++;
 }
 
+<<<<<<< HEAD
 int main(int ac, char **av)
 {
 	#define COLOR_GREEN	"\x1b[32m"
 	signal(SIGUSR1, sig_handler);
+=======
+int	main(int ac, char **av)
+{ 
+	signal(SIGUSR1, sig_handler);
+	
+>>>>>>> d18f7086f3c2ad9f2281df396f275cdacb0cc821
 	if (ac == 3)
 		send_str(ft_atoi(av[1]), av[2]);
 	else
+<<<<<<< HEAD
 	{
 		ft_printf("unvalid args");
 		return 0;
 	}
 	if (len == ft_strlen(av[2]))
 		ft_printf(COLOR_GREEN "\nMESSAGE RECIEVED\n\n");
+=======
+		printf("unvalid args");
+	//printf("%d",len);
+	if (len == strlen(av[2]))
+		printf("got it");
+>>>>>>> d18f7086f3c2ad9f2281df396f275cdacb0cc821
 	return (0);
 }
