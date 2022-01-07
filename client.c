@@ -14,7 +14,7 @@
 
 unsigned long	g_len = 0;
 
-char	*char_to_binary(char c, char *ret)
+void	char_to_binary(char c, char *ret)
 {
 	int		i;
 
@@ -28,7 +28,6 @@ char	*char_to_binary(char c, char *ret)
 		c /= 2;
 		i--;
 	}
-	return (ret);
 }
 
 void	send_str(int pid, char *str)
@@ -52,7 +51,7 @@ void	send_str(int pid, char *str)
 			else
 				kill(pid, SIGUSR2);
 			j++;
-			usleep(80);
+			usleep(100);
 		}
 		free(c);
 		i++;
