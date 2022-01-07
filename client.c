@@ -14,13 +14,11 @@
 
 unsigned long	g_len = 0;
 
-char	*char_to_binary(char c)
+char	*char_to_binary(char c, char *ret)
 {
-	char	*ret;
 	int		i;
 
 	i = 7;
-	ret = malloc(sizeof(char) * 8);
 	while (i >= 0)
 	{
 		if (c % 2 == 0)
@@ -42,7 +40,10 @@ void	send_str(int pid, char *str)
 	i = 0;
 	while (str[i])
 	{
-		c = char_to_binary(str[i]);
+		c = malloc(sizeof(char) * 8);
+		if (!c)
+			return ;
+		char_to_binary(str[i], c);
 		j = 0;
 		while (c[j])
 		{
