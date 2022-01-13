@@ -51,7 +51,7 @@ void	send_str(int pid, char *str)
 			else
 				kill(pid, SIGUSR2);
 			j++;
-			usleep(100);
+			usleep(1000);
 		}
 		free(c);
 		i++;
