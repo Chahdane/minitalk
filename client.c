@@ -71,10 +71,10 @@ int	main(int ac, char **av)
 		send_str(ft_atoi(av[1]), av[2]);
 	else
 	{
-		ft_printf("Unvalid args");
+		ft_printf("UNVALID ARGS");
 		return (0);
 	}
 	if (g_len == ft_strlen(av[2]))
-		ft_printf("\nMESSAGE RECIEVED\n\n");
+		ft_printf("\nMESSAGE RECEIVED\n\n");
 	return (0);
 }
